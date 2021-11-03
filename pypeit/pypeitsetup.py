@@ -224,6 +224,13 @@ class PypeItSetup:
         # Now setup PypeIt using that file
         return cls.from_pypeit_file(pypeit_file)
 
+    @classmethod
+    def from_fitstbl(cls, spectrograph_name, fitstbl):
+        file_list = [os.path.join(x, y) for (x,y) in zip(fitstbl['directory'], fitstbl['filename'])]
+        slf = cls(file_list = file_list, spectrograph_name=spectrograph_name)
+        slf.fitstbl = fitstbl
+        return slf
+
     @staticmethod
     def vanilla_pypeit_file(pypeit_file, root, spectrograph, extension='.fits'):
         """
